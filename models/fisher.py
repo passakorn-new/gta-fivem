@@ -4,7 +4,7 @@ from constants import *
 from models.coordinate import Coordinate
 
 class Fisher:
-    IMG_TEMP_PATH = r'C:\Users\newso\workspace\fivem\asset\temp_fishing.png'
+    IMG_TEMP_PATH = r'C:\Users\newso\gta-fivem\asset\temp_fishing.png'
     FISHING_CHAR_COORDINATE = Coordinate(
         FISHING_RANDOM_CHAR_POS_X,
         FISHING_RANDOM_CHAR_POS_Y,
@@ -23,3 +23,6 @@ class Fisher:
         if x != None:
             print(f'DETECT {charactor_finded[0]} !!')
             pydirectinput.typewrite([charactor_finded[0], charactor_finded[0], charactor_finded[0], charactor_finded[0], charactor_finded[0]], interval=0.20)
+
+    def set_auto_fishing_afk(self):
+        pydirectinput.press(ROD_FISH)

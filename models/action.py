@@ -20,11 +20,11 @@ class Action:
 
     def set_eat_and_drink_scheduler(self):
         print("set_eat_and_drink_scheduler")
-        self.cancel_current_action()
+        self.cancel_current_action(delay=15)
         pydirectinput.press(FOOD_KEYBIND)
-        time.sleep(10)
+        time.sleep(30)
         pydirectinput.press(DRINK_KEYBIND)
-        time.sleep(10)  
+        time.sleep(20)  
 
     def set_drop_item(self, item_name_list):
         print("set_drop_item")
@@ -57,8 +57,7 @@ class Action:
     def set_keep_item_in_car(self, item_name_list):
         print("set_keep_item_in_car")
         self.cancel_current_action(delay=15)
-        pydirectinput.press('s')
-        time.sleep(5)
+
         pydirectinput.press(UNLOCK_CAR)
         time.sleep(2)
         pydirectinput.press(OPEN_CAR_INVENTORY)
@@ -89,8 +88,7 @@ class Action:
     def set_take_item_in_car(self, item_name_dict):
         print("set_take_item_in_car")
         self.cancel_current_action(delay=15)
-        pydirectinput.press('s')
-        time.sleep(5)
+
         pydirectinput.press(UNLOCK_CAR)
         time.sleep(2)
         pydirectinput.press(OPEN_CAR_INVENTORY)
