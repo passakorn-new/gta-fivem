@@ -11,7 +11,7 @@ DRINK_KEYBIND = '5'
 OPEN_INVENTORY = 'f2'
 OPEN_CAR_INVENTORY = 'l'
 ROD_FISH = '1'
-FARM_MANAGER = '2'
+FARM_MANAGER = '1'
 UNLOCK_CAR = 'u'
 
 
@@ -25,8 +25,8 @@ AMOUNT_TEXT_INVENTORY_POS_X = 960
 AMOUNT_TEXT_INVENTORY_POS_Y = 592
 
 # STATIC POSITION NORMAL
-SEARCH_INVENTORY_POS_X = 1466
-SEARCH_INVENTORY_POS_Y = 263
+SEARCH_INVENTORY_POS_X = 1468
+SEARCH_INVENTORY_POS_Y = 26
 
 FIRST_ITEM_POS_X = 482
 FIRST_ITEM_POS_Y = 323
@@ -55,9 +55,13 @@ FIRST_FIND_ITEM_CAR_POS_Y = 338
 
 
 # ITEM
-ITEM_JUNK_NAME = '-pt' # ขยะ
-ITEM_FISHING_BAIT_NAME = 'gspnjv9dx]k' # เหยื่อตกปลา
-ITEM_OCTOPUS_NAME = 'x]ks,7d' # ปลาหมึก
-ITEM_TUNA_NAME = 'ojk' # ปลาทูน่า
-ITEM_CAT_NAME = 'ohv\'c,;' # น้องแมว
-ITEM_SALMON_NAME = 'x]kc' #'x]kc:],v]'
+ITEM_JUNK_NAME = 'ขยะ' # ขยะ
+ITEM_FISHING_BAIT_NAME = 'เหยื่อตกปลา' # เหยื่อตกปลา
+ITEM_OCTOPUS_NAME = 'ปลาหมึก' # ปลาหมึก
+ITEM_TUNA_NAME = 'ปลาทูน่า' # ปลาทูน่า
+ITEM_CAT_NAME = 'น้องแมว' # น้องแมว
+ITEM_SALMON_NAME = 'ปลาแซลม่อน' #'x]kc:],v]'
+
+ITEM_CAT_NAME = 'น้องแมว'
+ITEM_RICE_NAME = 'รวงข้าว'
+ITEM_MILK_NAME = 'นมวัว'

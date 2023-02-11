@@ -6,7 +6,6 @@ from models.fisher import Fisher
 from models.action import Action
 from constants import *
 import schedule
-import pyautogui
 
 scheduler = schedule.Scheduler()
 helper = Helper()

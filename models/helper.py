@@ -1,8 +1,9 @@
 import cv2
 import pytesseract
 import pyautogui
+import numpy as np
+
 from constants import *
-from models.coordinate import Coordinate
 
 class Helper:
     pytesseract.pytesseract.tesseract_cmd = TESSERACT_CMD_PATH
@@ -10,8 +11,18 @@ class Helper:
     def __init__(self):
         pass
 
-    def find_img_in_screen(self, img_path, confidence=0.8):
-        position = pyautogui.locateOnScreen(img_path, confidence=confidence)
+    def find_img_in_screen(self, img_path, confidence=0.8, gray_scale=False):
+        try:
+            if gray_scale:
+                original_img = cv2.imread(img_path)
+                gray_image = cv2.cvtColor(np.array(original_img), cv2.COLOR_RGB2GRAY)
+                img_path = f'{img_path}-gray'
+                cv2.imwrite(img_path, gray_image)
+
+            position =pyautogui.locateOnScreen(img_path, confidence=confidence)
+            print("Image found at", position)
+        except pyautogui.ImageNotFoundException:
+            print("Image not found on screen")
         return position
 
     def detect_text_from_img(self, coodinate, temp_path, config=None):
