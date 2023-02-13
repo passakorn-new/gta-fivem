@@ -25,7 +25,7 @@ WHITE_COLOUR = (255, 255, 255)
 
 class Farmer:
     def __init__(self, helper):
-        self.total = 35
+        self.total = 30
         self.helper = helper
         self.animals = []
 
@@ -126,8 +126,8 @@ class Farmer:
         print("start..")
         print("total : ", self.total)
         if self.total <= 0:
-            # import subprocess
-            # subprocess.call(["shutdown", "/s", "/t", "2000"])
+            import subprocess
+            subprocess.call(["shutdown", "/s"])
             exit()
         
         pydirectinput.press(FARM_MANAGER)

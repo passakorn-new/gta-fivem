@@ -61,6 +61,7 @@ ITEM_OCTOPUS_NAME = 'ปลาหมึก' # ปลาหมึก
 ITEM_TUNA_NAME = 'ปลาทูน่า' # ปลาทูน่า
 ITEM_CAT_NAME = 'น้องแมว' # น้องแมว
 ITEM_SALMON_NAME = 'ปลาแซลม่อน' #'x]kc:],v]'
+ITEM_MAP_NAME = 'Map'
 
 ITEM_CAT_NAME = 'น้องแมว'
 ITEM_RICE_NAME = 'รวงข้าว'

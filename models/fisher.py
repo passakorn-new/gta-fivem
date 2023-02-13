@@ -46,7 +46,7 @@ class Fisher:
 
         pydirectinput.press(UNLOCK_CAR)
         time.sleep(2)
-        pydirectinput.press(OPEN_CAR_INVENTORY)
+        pydirectinput.typewrite([OPEN_CAR_INVENTORY, OPEN_CAR_INVENTORY, OPEN_CAR_INVENTORY], interval=0.10)
         time.sleep(2)
 
         pydirectinput.leftClick(SEARCH_CAR_INVENTORY_POS_X, SEARCH_CAR_INVENTORY_POS_Y)
