@@ -1,5 +1,6 @@
-import pydirectinput, time, pyautogui, pyperclip
+import pydirectinput, time, pyautogui, pyperclip, subprocess
 from constants import *
+from models.coordinate import Coordinate
 
 BUY_ANIMAL_POS_X = 690
 BUY_ANIMAL_POS_Y = 735
@@ -16,7 +17,7 @@ LOVE_POS_Y = 600
 ANIMAL_POS_X = [696, 828, 959, 1090, 1222]
 ANIMAL_POS_Y = 770
 
-OPEATOR_ANIMAL_POS_X = [737, 867, 997, 1127, 1257]
+OPEATOR_ANIMAL_POS_X = [737, 867, 997, 1127, 1258]
 OPERATOR_ANIMAL_POS_Y = 800
 
 DEFAULT_COLOUR = (55, 55, 55)
@@ -24,10 +25,16 @@ GREEN_COLOUR = (0, 210, 140)
 WHITE_COLOUR = (255, 255, 255)
 
 class Farmer:
+    COUNT_ANIMAL = Coordinate(1236, 725, 40, 20)
+    IMG_TEMP_PATH = r'..\asset\temp_count_animal_test.png'
+
     def __init__(self, helper):
-        self.total = 30
+        self.total = 35
         self.helper = helper
-        self.animals = []
+        subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 16 * 60)}'])
+        
+        # self.animals = []
+        # subprocess.call(["shutdown", "/a"])
 
     def auto_milk(self):
         pydirectinput.press('e')
@@ -45,8 +52,8 @@ class Farmer:
 
     def set_keep_and_take_item_in_car(self):
         pydirectinput.press('esc')
-        time.sleep(1)
-        pydirectinput.typewrite(['e', 'e', 'e'], interval=0.2)
+        time.sleep(2)
+        pydirectinput.typewrite(['e', 'e', 'e', 'e'], interval=0.2)
         pydirectinput.leftClick(1099, 795)
         time.sleep(2)
 
@@ -62,9 +69,6 @@ class Farmer:
         pydirectinput.leftClick(AMOUNT_TEXT_INVENTORY_POS_X, AMOUNT_TEXT_INVENTORY_POS_Y)
         pydirectinput.typewrite('5')
         pydirectinput.leftClick(INVENTORY_CONFIRM_POS_X, INVENTORY_CONFIRM_POS_Y)
-        
-        # pydirectinput.leftClick(INVENTORY_MAX_POS_X, INVENTORY_MAX_POS_Y)
-        # pydirectinput.leftClick(INVENTORY_CONFIRM_POS_X, INVENTORY_CONFIRM_POS_Y)
         
         # clear text search
         pydirectinput.leftClick(SEARCH_CAR_INVENTORY_POS_X, SEARCH_CAR_INVENTORY_POS_Y)
@@ -92,35 +96,23 @@ class Farmer:
 
         pydirectinput.press('esc')
         
+    def check_animal_success(self):
+        animal_empty_pos = self.helper.find_img_in_screen(r'..\asset\empty_animal_slot.png', confidence=0.9)
+        return animal_empty_pos != None
     
-    def feed_animal(self, index):
-        # fix case delete index
-        if index >= len(self.animals):
-            return
+    def feed_animal(self):
+        for index in range(5):
+            pydirectinput.leftClick(ANIMAL_POS_X[index], ANIMAL_POS_Y)
+            pydirectinput.leftClick(WATER_POS_X, WATER_POS_Y)
 
-        if pyautogui.pixelMatchesColor(OPEATOR_ANIMAL_POS_X[index], OPERATOR_ANIMAL_POS_Y, DEFAULT_COLOUR) == False:
-            if self.animals[index] < 4:
-                print(f"feeded {index + 1}")
-                self.animals[index] += 1
-                pydirectinput.leftClick(ANIMAL_POS_X[index], ANIMAL_POS_Y)
-                pydirectinput.leftClick(WATER_POS_X, WATER_POS_Y)
+            pydirectinput.leftClick(ANIMAL_POS_X[index], ANIMAL_POS_Y)
+            pydirectinput.leftClick(MILK_POS_X, MILK_POS_Y)
 
-                pydirectinput.leftClick(ANIMAL_POS_X[index], ANIMAL_POS_Y)
-                pydirectinput.leftClick(MILK_POS_X, MILK_POS_Y)
+            pydirectinput.leftClick(ANIMAL_POS_X[index], ANIMAL_POS_Y)
+            pydirectinput.leftClick(LOVE_POS_X, LOVE_POS_Y)
 
-                pydirectinput.leftClick(ANIMAL_POS_X[index], ANIMAL_POS_Y)
-                pydirectinput.leftClick(LOVE_POS_X, LOVE_POS_Y)
-
-                # keep
-                time.sleep(1)
-                print((self.animals[index]), " ::: round")
-                if self.animals[index] == 4:
-                    print(f"taked {index + 1}")
-                    pydirectinput.leftClick(ANIMAL_POS_X[index], 830)
-                    del self.animals[index]
-                    time.sleep(1)
-        else:
-            print(pyautogui.pixel(OPEATOR_ANIMAL_POS_X[index], OPERATOR_ANIMAL_POS_Y), ":: color not match")
+            time.sleep(1)
+            pydirectinput.leftClick(ANIMAL_POS_X[index], 830)
                    
     def set_auto_farming(self):
         print("start..")
@@ -133,15 +125,12 @@ class Farmer:
         pydirectinput.press(FARM_MANAGER)
         time.sleep(1)
         self.buy_animal(times=5)
-        self.animals = [0, 0, 0, 0, 0]
 
-        while len(self.animals) > 0:
-            print(len(self.animals), " ::: len")
-            print(self.animals)
-            time.sleep(1)
-            for index in range(len(self.animals)):
-                self.feed_animal(index)
+        while True:
+            self.feed_animal()
+            if self.check_animal_success():
+                break
 
         time.sleep(3)
-        self.set_keep_and_take_item_in_car()
         self.total -= 5
+        self.set_keep_and_take_item_in_car()
