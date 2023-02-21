@@ -64,5 +64,7 @@ ITEM_SALMON_NAME = 'ปลาแซลม่อน' #'x]kc:],v]'
 ITEM_MAP_NAME = 'Map'
 
 ITEM_CAT_NAME = 'น้องแมว'
+ITEM_SHEEP_NAME = 'แกะ'
 ITEM_RICE_NAME = 'รวงข้าว'
+ITEM_CORN_NAME = 'ข้าวโพด'
 ITEM_MILK_NAME = 'นมวัว'

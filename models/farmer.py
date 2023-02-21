@@ -28,10 +28,13 @@ class Farmer:
     COUNT_ANIMAL = Coordinate(1236, 725, 40, 20)
     IMG_TEMP_PATH = r'..\asset\temp_count_animal_test.png'
 
-    def __init__(self, helper):
-        self.total = 35
+    def __init__(self, helper, name):
+        self.total = 40
+        self.animal_name = name
+        self.feed_1 = ITEM_MILK_NAME
+        self.feed_2 = ITEM_RICE_NAME if name == ITEM_CAT_NAME else ITEM_CORN_NAME
         self.helper = helper
-        subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 16 * 60)}'])
+        # subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 20 * 60)}'])
         
         # self.animals = []
         # subprocess.call(["shutdown", "/a"])
@@ -58,7 +61,7 @@ class Farmer:
         time.sleep(2)
 
         pydirectinput.leftClick(SEARCH_CAR_INVENTORY_POS_X, SEARCH_CAR_INVENTORY_POS_Y)
-        pyperclip.copy(ITEM_CAT_NAME)
+        pyperclip.copy(self.animal_name)
         pyautogui.hotkey('ctrl', 'v')
         
         # drag to car
@@ -77,7 +80,7 @@ class Farmer:
         # take item!!!
         pydirectinput.leftClick(SEARCH_CAR_INVENTORY_POS_X, SEARCH_CAR_INVENTORY_POS_Y)
         
-        for item_name in [ITEM_RICE_NAME, ITEM_MILK_NAME]:
+        for item_name in [self.feed_1, self.feed_2]:
             pyperclip.copy(item_name)
             pyautogui.hotkey('ctrl', 'v')
             

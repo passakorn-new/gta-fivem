@@ -10,7 +10,7 @@ import pyautogui
 scheduler = schedule.Scheduler()
 helper = Helper()
 
-farmer = Farmer(helper=helper)
+farmer = Farmer(helper=helper, name=ITEM_CAT_NAME)
 
 # scheduler.every(1).seconds.do(farmer.auto_milk).tag('milk')
 scheduler.every(5).seconds.do(farmer.set_auto_farming).tag('farming')
