@@ -29,17 +29,20 @@ class Farmer:
     IMG_TEMP_PATH = r'..\asset\temp_count_animal_test.png'
 
     def __init__(self, helper, name):
+        subprocess.call(["shutdown", "/a"])
         self.total = 40
         self.animal_name = name
         self.feed_1 = ITEM_MILK_NAME
         self.feed_2 = ITEM_RICE_NAME if name == ITEM_CAT_NAME else ITEM_CORN_NAME
         self.helper = helper
-        # subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 20 * 60)}'])
-        
+        subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 20 * 60)}'])
         # self.animals = []
         # subprocess.call(["shutdown", "/a"])
 
     def auto_milk(self):
+        pydirectinput.press('e')
+
+    def auto_coca(self):
         pydirectinput.press('e')
 
     def buy_animal(self, times=1):
@@ -122,6 +125,8 @@ class Farmer:
         print("total : ", self.total)
         if self.total <= 0:
             import subprocess
+            subprocess.call(["shutdown", "/a"])
+            time.sleep(3)
             subprocess.call(["shutdown", "/s"])
             exit()
         
