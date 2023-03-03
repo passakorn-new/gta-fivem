@@ -28,16 +28,17 @@ class Farmer:
     COUNT_ANIMAL = Coordinate(1236, 725, 40, 20)
     IMG_TEMP_PATH = r'..\asset\temp_count_animal_test.png'
 
-    def __init__(self, helper, name):
+    def __init__(self, helper, name, total, is_shutdown):
         subprocess.call(["shutdown", "/a"])
-        self.total = 40
+        self.total = total
         self.animal_name = name
         self.feed_1 = ITEM_MILK_NAME
         self.feed_2 = ITEM_RICE_NAME if name == ITEM_CAT_NAME else ITEM_CORN_NAME
         self.helper = helper
-        subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 20 * 60)}'])
-        # self.animals = []
-        # subprocess.call(["shutdown", "/a"])
+        self.is_shutdown = is_shutdown
+
+        if self.is_shutdown:
+            subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 18 * 60)}'])
 
     def auto_milk(self):
         pydirectinput.press('e')
@@ -123,13 +124,14 @@ class Farmer:
     def set_auto_farming(self):
         print("start..")
         print("total : ", self.total)
+
         if self.total <= 0:
-            import subprocess
-            subprocess.call(["shutdown", "/a"])
-            time.sleep(3)
-            subprocess.call(["shutdown", "/s"])
+            if self.is_shutdown:
+                subprocess.call(["shutdown", "/a"])
+                time.sleep(3)
+                subprocess.call(["shutdown", "/s"])
             exit()
-        
+
         pydirectinput.press(FARM_MANAGER)
         time.sleep(1)
         self.buy_animal(times=5)
