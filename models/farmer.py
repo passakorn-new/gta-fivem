@@ -38,7 +38,7 @@ class Farmer:
         self.is_shutdown = is_shutdown
 
         if self.is_shutdown:
-            subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 18 * 60)}'])
+            subprocess.call(["shutdown", "/s", "/t", f'{int(self.total / 5 * 20 * 60)}'])
 
     def auto_milk(self):
         pydirectinput.press('e')
